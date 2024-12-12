@@ -1,9 +1,9 @@
-# Liang-2024-et-al.Global-soil-brGDGT-SINDY
+# Code of Edge effect MS by Liang et al.,2024
 
 # Description
 
 This repository contains the data analysis code and related scripts for the study:
-**Mitigating paleotemperature bias under no-analogue conditions through quantitative proxy constraints**.
+**Mitigating the edge effect in paleoclimate reconstruction under no-analog environmental and eco-physiological conditions**.
 The study quantified the factors contributing to the edge effect and employed a Sparse Identification of Nonlinear Dynamics (SINDY) approach for dynamic simulation of the brGDGT-based temperature biases.
 
 ## **Contents**
