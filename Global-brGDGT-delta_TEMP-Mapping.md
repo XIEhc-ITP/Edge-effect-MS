@@ -7,7 +7,6 @@ Jie Liang
   - [2. Map Visualization](#2-map-visualization)
     - [2.1 Scatter Map (Observed Data)](#21-scatter-map-observed-data)
     - [2.2 Raster Map (Predicted Data)](#22-raster-map-predicted-data)
-  - [](#section)
   - [3. Combine and Export Figures](#3-combine-and-export-figures)
 
 # Global brGDGT ΔTemp Mapping
@@ -84,8 +83,6 @@ p2 <- ggplot() +
 ```
 
 ![](figures/p2.png)
-
-## 
 
 ## 3. Combine and Export Figures
 
