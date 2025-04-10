@@ -1,29 +1,20 @@
----
-title: "Global brGDGT ΔTemp Mapping"
-author: "Jie Liang"
-output:
-  github_document:
-    toc: true
-    fig_path: "figures/"
----
+Global brGDGT ΔTemp Mapping
+================
+Jie Liang
+
+- [Global brGDGT ΔTemp Mapping](#global-brgdgt-δtemp-mapping)
+  - [1. Data Import and Preprocessing](#1-data-import-and-preprocessing)
+  - [2. Map Visualization](#2-map-visualization)
+    - [2.1 Scatter Map (Observed Data)](#21-scatter-map-observed-data)
+    - [2.2 Raster Map (Predicted Data)](#22-raster-map-predicted-data)
+  - [](#section)
+  - [3. Combine and Export Figures](#3-combine-and-export-figures)
 
 # Global brGDGT ΔTemp Mapping
 
 ## 1. Data Import and Preprocessing
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
-library(readxl)
-library(ggplot2)
-library(sf)
-library(rnaturalearth)
-library(rnaturalearthdata)
-library(terra)
-library(tidyterra)
-library(patchwork)
-```
-
-```{r read-data}
+``` r
 df <- read_excel("gloabl soil brGDGT dataset - v2.xlsx", sheet = " Temperature_Comparison", .name_repair = "minimal")
 df_clean0 <- df[, c("Latitude_degN", "Longitude_degE", "deltaMAF-WC bnn")]
 df_clean <- na.omit(df_clean0)
@@ -32,7 +23,7 @@ colnames(df_clean) <- c("lat", "lon", "delta")
 
 ## 2. Map Visualization
 
-```{r Map Visualization}
+``` r
 tif <- rast("delta_temp.tif")
 names(tif) <- "delta_temp"
 world <- ne_countries(scale = "medium", returnclass = "sf")
@@ -43,7 +34,7 @@ rd_bu <- rev(hcl.colors(100, "RdBu"))
 
 ### 2.1 Scatter Map (Observed Data)
 
-```{r  Scatter Map}
+``` r
 p1 <- ggplot() +
   geom_rect(aes(xmin = -180, xmax = 180, ymin = -60, ymax = 85), fill = "#7f7f7f") +
   geom_sf(data = world, fill = "lightgray", color = NA) +
@@ -71,11 +62,13 @@ p1 <- ggplot() +
 p1
 ```
 
-![![](figures/p1.png)](figures/p1.png)
+![](Global-brGDGT-delta_TEMP-Mapping_files/figure-gfm/Scatter%20Map-1.png)<!-- -->
+
+![](figures/p1.png)
 
 ### 2.2 Raster Map (Predicted Data)
 
-```{r Raster Map}
+``` r
 p2 <- ggplot() +
   geom_rect(aes(xmin = -180, xmax = 180, ymin = -60, ymax = 85)) +
   geom_spatraster(data = tif) +
@@ -90,16 +83,17 @@ p2 <- ggplot() +
   )
 ```
 
-
 ![](figures/p2.png)
 
 ## 
 
 ## 3. Combine and Export Figures
 
-```{r Combine and Export Figures}
+``` r
 combined <- (p1 / p2) + plot_layout(guides = "collect") & theme(legend.position = "bottom")
 combined
 ```
+
+![](Global-brGDGT-delta_TEMP-Mapping_files/figure-gfm/Combine%20and%20Export%20Figures-1.png)<!-- -->
 
 ![](figures/combine.png)
